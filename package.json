@@ -1,0 +1,20 @@
+{
+  "name": "apnar-projukti-gyan",
+  "version": "1.0.0",
+  "description": "আপনার প্রযুক্তি জ্ঞান - Interactive Futuristic Bengali Technology Quiz Website",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "bengali",
+    "technology",
+    "quiz",
+    "educational",
+    "futuristic",
+    "space-tech"
+  ],
+  "author": "Shamim Ahsan",
+  "license": "MIT"
+}

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>আপনার প্রযুক্তি জ্ঞান - Technology Knowledge Test</title>
+  <meta name="description" content="স্মার্টফোন, কম্পিউটার, AI, প্রসেসর, মহাকাশ ও প্রযুক্তি সম্পর্কে আপনার মৌলিক জ্ঞান যাচাই করুন মাত্র ১০টি প্রশ্নের মাধ্যমে।" />
+  
+  <!-- Favicon Icon SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+  
+  <!-- Google Fonts: Hind Siliguri, Orbitron & Fira Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Hind+Siliguri:wght@400;500;600;700&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Fullscreen Cosmic Canvas Background (Stars, Nebulae, Rotating Earth, Cruising Rocket, Code Streams) -->
+  <canvas id="spaceCanvas"></canvas>
+
+  <!-- Celebration Confetti Canvas for Result Screen -->
+  <canvas id="celebrationCanvas"></canvas>
+
+  <!-- Rocket Launch Warp Transition Overlay -->
+  <div id="rocketLaunchOverlay" class="rocket-launch-overlay" aria-hidden="true">
+    <div class="launch-stage">
+      <div class="warp-speed-lines"></div>
+      <div id="launchingRocketElement" class="launching-rocket">
+        🚀
+        <div class="rocket-booster-fire"></div>
+      </div>
+      <div class="launch-mission-text">মিশন লঞ্চ হচ্ছে... স্পেস কুইজে স্বাগতম!</div>
+    </div>
+  </div>
+
+  <!-- SITE HEADER & NAVIGATION -->
+  <header class="site-header">
+    <div class="header-container">
+      <!-- Brand Logo -->
+      <a href="#home" class="brand-logo" data-page-target="home" aria-label="হোম পেজে যান">
+        <div class="brand-emblem">
+          <span>🚀</span>
+        </div>
+        <div class="brand-text-group">
+          <span class="brand-title">আপনার প্রযুক্তি জ্ঞান</span>
+          <span class="brand-subtitle">TECH KNOWLEDGE TEST</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="মূল নেভিগেশন">
+        <a href="#home" class="nav-link active" data-page-target="home">হোম</a>
+        <a href="#technology" class="nav-link" data-page-target="technology">তথ্য ও প্রযুক্তি</a>
+        <a href="#about" class="nav-link" data-page-target="about">আমাদের সম্পর্কে</a>
+        <a href="#participants" class="nav-link" data-page-target="participants">গ্রহণকারী</a>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <button id="soundToggleBtn" class="sound-toggle-btn" title="শব্দ অন/অফ করুন" aria-label="সাউন্ড এফেক্ট টগল">
+          <span class="sound-icon">🔊</span>
+        </button>
+
+        <button id="navQuizBtn" class="nav-cta-btn">
+          <span>কুইজ মিশন</span>
+          <span>⚡</span>
+        </button>
+
+        <!-- Mobile Hamburger Button -->
+        <button id="mobileMenuToggle" class="mobile-hamburger" aria-label="মোবাইল মেনু খুলুন" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
+  <aside id="mobileNavDrawer" class="mobile-nav-drawer" aria-label="মোবাইল ড্রয়ার মেনু">
+    <a href="#home" class="mobile-nav-link active" data-page-target="home">হোম</a>
+    <a href="#technology" class="mobile-nav-link" data-page-target="technology">তথ্য ও প্রযুক্তি</a>
+    <a href="#about" class="mobile-nav-link" data-page-target="about">আমাদের সম্পর্কে</a>
+    <a href="#participants" class="mobile-nav-link" data-page-target="participants">গ্রহণকারী</a>
+    <button id="mobileDrawerQuizBtn" class="btn-glowing-launch mobile-drawer-cta" onclick="window.apnarProjuktiApp.quizManager.startRocketLaunchSequence(); window.apnarProjuktiApp.closeMobileMenu();">
+      <span>পরীক্ষা শুরু করুন</span>
+      <span class="btn-rocket-icon">🚀</span>
+    </button>
+  </aside>
+
+  <!-- MAIN APPLICATION CONTENT & ROUTED PAGES -->
+  <main class="main-content">
+
+    <!-- ====================================================================
+         PAGE 1: HOME PAGE (হোম)
+         ==================================================================== -->
+    <section id="page-home" class="page-view active" aria-label="হোম পেজ">
+      <div class="hero-section">
+        <div class="hero-grid">
+          <!-- Left Column: Hero Mission Info & CTA -->
+          <div class="hero-content">
+            <div class="hero-pill-badge">
+              <span class="pulse-dot"></span>
+              <span>ইন্টারেক্টিভ স্পেস টেকনোলজি প্ল্যাটফর্ম</span>
+            </div>
+
+            <h1 class="hero-title">আপনার প্রযুক্তি জ্ঞান কতটা?</h1>
+
+            <h2 class="hero-subtitle">
+              প্রযুক্তি সম্পর্কে আপনার জ্ঞান পরীক্ষা করুন মাত্র ১০টি প্রশ্নের মাধ্যমে।
+            </h2>
+
+            <p class="hero-description">
+              স্মার্টফোন, কম্পিউটার, AI, প্রসেসর, মহাকাশ ও প্রযুক্তি সম্পর্কে আপনার মৌলিক জ্ঞান কতটা—তা যাচাই করুন।
+            </p>
+
+            <div class="hero-cta-wrapper">
+              <!-- Large Futuristic Glowing Button -->
+              <button id="heroLaunchBtn" class="btn-glowing-launch" aria-label="আপনার প্রযুক্তি জ্ঞান পরীক্ষা শুরু করুন">
+                <span>আপনার প্রযুক্তি জ্ঞান পরীক্ষা করুন</span>
+                <span class="btn-rocket-icon">🚀</span>
+              </button>
+            </div>
+
+            <div class="hero-stats-row">
+              <div class="hero-stat-item">
+                <span class="stat-number">১০ টি</span>
+                <span class="stat-label">মৌলিক প্রশ্ন</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="stat-number">১০০</span>
+                <span class="stat-label">মোট নম্বর</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="stat-number">১০০%</span>
+                <span class="stat-label">ফ্রি ডিজিটাল সনদ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Holographic Tech Orb Card -->
+          <div class="hero-visual-card glass-panel">
+            <div class="hologram-orbit-container">
+              <div class="hologram-ring ring-outer"></div>
+              <div class="hologram-ring ring-middle"></div>
+              <div class="hologram-ring ring-inner"></div>
+              <div class="hologram-core-icon">🌌</div>
+            </div>
+
+            <h3 class="visual-title">ডিজিটাল মহাবিশ্ব অন্বেষণ</h3>
+            <p class="topic-summary" style="font-size: 0.95rem;">
+              বিজ্ঞান ও আধুনিক প্রযুক্তির রোমাঞ্চকর জগতে প্রবেশ করুন এবং প্রতিটি ধাপে নতুন কিছু শিখুন।
+            </p>
+
+            <div class="visual-badges">
+              <span class="visual-chip">📱 স্মার্টফোন ও OS</span>
+              <span class="visual-chip">🧠 AI ও প্রসেসর</span>
+              <span class="visual-chip">🔬 সেমিকন্ডাক্টর</span>
+              <span class="visual-chip">🚀 স্পেস টেক</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PAGE 2: INFORMATION & TECHNOLOGY (তথ্য ও প্রযুক্তি)
+         ==================================================================== -->
+    <section id="page-technology" class="page-view" aria-label="তথ্য ও প্রযুক্তি পেজ">
+      <div class="content-wrapper">
+        <div class="page-header-block">
+          <div class="section-pill-tag">
+            <span>💡</span>
+            <span>প্রযুক্তি শিক্ষা হাব</span>
+          </div>
+          <h2 class="page-main-heading">তথ্য ও প্রযুক্তি</h2>
+          <p class="page-lead-para">
+            স্মার্টফোন থেকে শুরু করে সেমিকন্ডাক্টর, প্রসেসর, কৃত্রিম বুদ্ধিমত্তা ও মহাকাশ বিজ্ঞান—আধুনিক প্রযুক্তির গুরুত্বপূর্ণ ধারণাগুলো জানুন সহজ বাংলায়।
+          </p>
+        </div>
+
+        <!-- 8 Comprehensive Educational Topics Grid (Rendered via js/app.js) -->
+        <div id="techTopicsGrid" class="tech-topics-grid"></div>
+
+        <!-- Bottom CTA to take quiz -->
+        <div class="page-cta-banner glass-panel">
+          <h3 class="banner-title">শেখা শেষ? এবার জ্ঞান পরীক্ষা করার পালা!</h3>
+          <p class="banner-subtitle">
+            মাত্র ১০টি প্রশ্নের মাধ্যমে যাচাই করে নিন আপনার প্রযুক্তি সচেতনতা কতখানি প্রখর।
+          </p>
+          <button id="infoCtaBtn" class="btn-glowing-launch">
+            <span>আপনার প্রযুক্তি জ্ঞান পরীক্ষা করুন</span>
+            <span class="btn-rocket-icon">🚀</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PAGE 3: ABOUT US (আমাদের সম্পর্কে)
+         ==================================================================== -->
+    <section id="page-about" class="page-view" aria-label="আমাদের সম্পর্কে পেজ">
+      <div class="content-wrapper">
+        <div class="page-header-block">
+          <div class="section-pill-tag">
+            <span>🌐</span>
+            <span>প্ল্যাটফর্ম পরিচিতি ও উদ্দেশ্য</span>
+          </div>
+          <h2 class="page-main-heading">আমাদের সম্পর্কে</h2>
+        </div>
+
+        <div class="about-grid-showcase">
+          <div class="about-text-content">
+            <div class="about-quote-box">
+              "প্রযুক্তি আমাদের দৈনন্দিন জীবনের একটি গুরুত্বপূর্ণ অংশ। এই প্ল্যাটফর্মের উদ্দেশ্য হলো সহজ ও আনন্দদায়ক উপায়ে মানুষের প্রযুক্তি সম্পর্কে মৌলিক জ্ঞান যাচাই করা।"
+            </div>
+
+            <p class="about-core-para">
+              বর্তমান যুগে প্রযুক্তির অগ্রগতি অবিশ্বাস্য গতিতে ঘটছে। স্মার্টফোন, কৃত্রিম বুদ্ধিমত্তা (AI), ক্লাউড কম্পিউটিং এবং মহাকাশ গবেষণা আমাদের প্রতিদিনের জীবনযাত্রাকে বদলে দিচ্ছে। কিন্তু আমরা কতটুকু জানি এই ডিভাইসগুলোর ভেতরের বিজ্ঞানের কথা?
+            </p>
+
+            <p class="about-core-para">
+              <strong>"আপনার প্রযুক্তি জ্ঞান"</strong> হলো এমন একটি আধুনিক শিক্ষামূলক প্ল্যাটফর্ম, যেখানে জটিল প্রযুক্তিগত বিষয়গুলো সহজ বাংলা ভাষায় তুলে ধরা হয়েছে এবং যেকোনো মানুষ মাত্র কয়েক মিনিটে তার মৌলিক জ্ঞান পরীক্ষা করতে পারেন।
+            </p>
+          </div>
+
+          <!-- Futuristic Hologram Visual Element -->
+          <div class="about-hologram-visual">
+            <div class="holo-sphere-wrap">
+              <div class="holo-axis"></div>
+              <div class="holo-axis" style="animation-delay: -3s; transform: rotateX(45deg) rotateY(45deg);"></div>
+              <div class="holo-inner-core">🌐</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Core Mission Feature Cards -->
+        <div class="about-features-grid">
+          <div class="about-feature-card glass-panel">
+            <span class="about-feat-icon">🎯</span>
+            <h4 class="about-feat-title">ওয়েবসাইটের উদ্দেশ্য</h4>
+            <p class="about-feat-desc">
+              সাধারণ মানুষ ও শিক্ষার্থীদের প্রযুক্তিভীতি দূর করে প্রযুক্তি সংক্রান্ত প্রাথমিক ধারণাগুলোর সাথে পরিচয় করিয়ে দেওয়া।
+            </p>
+          </div>
+
+          <div class="about-feature-card glass-panel">
+            <span class="about-feat-icon">📚</span>
+            <h4 class="about-feat-title">শিক্ষামূলক মিশন</h4>
+            <p class="about-feat-desc">
+              বাংলা ভাষায় মানসম্মত, বিজ্ঞানভিত্তিক এবং সহজে অনুধাবনযোগ্য তথ্য ও প্রযুক্তির শিক্ষা সর্বজনীনভাবে পৌঁছে দেওয়া।
+            </p>
+          </div>
+
+          <div class="about-feature-card glass-panel">
+            <span class="about-feat-icon">🛡️</span>
+            <h4 class="about-feat-title">প্রযুক্তি সচেতনতা</h4>
+            <p class="about-feat-desc">
+              ডিভাইসের হার্ডওয়্যার, সফটওয়্যার, ডেটা নিরাপত্তা এবং উদীয়মান কৃত্রিম বুদ্ধিমত্তা সম্পর্কে সচেতন সমাজ তৈরি।
+            </p>
+          </div>
+
+          <div class="about-feature-card glass-panel">
+            <span class="about-feat-icon">🎮</span>
+            <h4 class="about-feat-title">সহজ ও আনন্দদায়ক শিখন</h4>
+            <p class="about-feat-desc">
+              গেমিফাইড মহাকাশ মিশন থিম এবং তাৎক্ষণিক বিশ্লেষণ পদ্ধতির মাধ্যমে শিক্ষাকে আনন্দময় ও রোমাঞ্চকর রূপ দান।
+            </p>
+          </div>
+        </div>
+
+        <!-- Designer & Developer Credit Card: Shamim Ahsan -->
+        <div class="developer-credit-card glass-panel">
+          <div class="developer-badge-wrap">
+            <div class="dev-avatar">
+              <span>👨‍💻</span>
+            </div>
+            <div class="dev-info-text">
+              <span class="dev-role-tag">Design & Development</span>
+              <h3 class="dev-name">Shamim Ahsan</h3>
+              <p class="dev-bio">
+                এই প্ল্যাটফর্মটির সামগ্রিক পরিকল্পনা, ভবিষ্যৎমুখী মহাকাশ ও সাইবার ইন্টারফেস ডিজাইন এবং ইন্টারেক্টিভ কুইজ ইঞ্জিন সম্পূর্ণ একক প্রচেষ্টায় ডিজাইন ও ডেভেলপ করেছেন <strong>Shamim Ahsan</strong>। তথ্যপ্রযুক্তির মৌলিক জ্ঞান সহজ ও আকর্ষণীয় উপায়ে সর্বস্তরের মানুষের কাছে পৌঁছে দেওয়াই এই উদ্যোগের লক্ষ্য।
+              </p>
+            </div>
+          </div>
+          <div class="dev-tech-chips">
+            <span class="dev-chip">⚡ UI/UX Architecture</span>
+            <span class="dev-chip">🌌 Space-Tech Visuals</span>
+            <span class="dev-chip">💻 Interactive JavaScript</span>
+            <span class="dev-chip">📱 Responsive Design</span>
+            <span class="dev-chip">📜 Canvas Certificate Generator</span>
+          </div>
+        </div>
+
+        <!-- About Bottom Banner -->
+        <div class="page-cta-banner glass-panel">
+          <h3 class="banner-title">প্রযুক্তি যাত্রায় আপনিও অংশ নিন</h3>
+          <p class="banner-subtitle">
+            ১০টি প্রশ্নের মাধ্যমে নিজের প্রযুক্তি দক্ষতাকে যাচাই করে গ্রহণ করুন আপনার ডিজিটাল মূল্যায়ন সনদ।
+          </p>
+          <button class="btn-glowing-launch" onclick="window.apnarProjuktiApp.quizManager.startRocketLaunchSequence();">
+            <span>আপনার প্রযুক্তি জ্ঞান পরীক্ষা করুন</span>
+            <span class="btn-rocket-icon">🚀</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PAGE 4: PARTICIPANTS & LEADERBOARD (গ্রহণকারী)
+         ==================================================================== -->
+    <section id="page-participants" class="page-view" aria-label="গ্রহণকারী ও মেধা তালিকা পেজ">
+      <div class="content-wrapper">
+        <div class="page-header-block">
+          <div class="section-pill-tag">
+            <span>🏆</span>
+            <span>মেধা তালিকা ও অংশগ্রহণকারী তথ্য</span>
+          </div>
+          <h2 class="page-main-heading">গ্রহণকারী ও শীর্ষ ফলাফল</h2>
+          <p class="page-lead-para">
+            কুইজে অংশগ্রহণকারী সকল প্রযুক্তিপ্রেমীদের মোট সংখ্যা এবং শীর্ষ ১০ জনের ফলাফল ও সম্পন্নের সময় নিচে প্রদর্শিত হলো।
+          </p>
+        </div>
+
+        <!-- Summary Statistics Row -->
+        <div class="participants-stats-grid">
+          <div class="part-stat-card glass-panel">
+            <span class="part-stat-icon">👥</span>
+            <div class="part-stat-info">
+              <span class="part-stat-label">মোট গ্রহণকারী</span>
+              <span id="partTotalCount" class="part-stat-value val-cyan">১২৮ জন</span>
+            </div>
+          </div>
+
+          <div class="part-stat-card glass-panel">
+            <span class="part-stat-icon">⭐</span>
+            <div class="part-stat-info">
+              <span class="part-stat-label">১০০% নিখুঁত স্কোরধারী</span>
+              <span id="partPerfectCount" class="part-stat-value val-green">৪২ জন</span>
+            </div>
+          </div>
+
+          <div class="part-stat-card glass-panel">
+            <span class="part-stat-icon">📈</span>
+            <div class="part-stat-info">
+              <span class="part-stat-label">গড় স্কোর</span>
+              <span id="partAvgScore" class="part-stat-value val-purple">৮৬%</span>
+            </div>
+          </div>
+
+          <div class="part-stat-card glass-panel">
+            <span class="part-stat-icon">📅</span>
+            <div class="part-stat-info">
+              <span class="part-stat-label">আজকের অংশগ্রহণকারী</span>
+              <span id="partTodayCount" class="part-stat-value val-gold">১৫ জন</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leaderboard Table Section -->
+        <div class="leaderboard-section-card glass-panel">
+          <div class="leaderboard-card-header">
+            <div class="leaderboard-header-title-group">
+              <span class="leaderboard-badge">🚀 শীর্ষ ১০ মেধা তালিকা</span>
+              <h3 class="leaderboard-title">সেরা ১০ জন গ্রহণকারীর ফলাফল ও সময়</h3>
+            </div>
+            <span class="live-pulse-badge">
+              <span class="pulse-dot"></span>
+              সরাসরি সংরক্ষিত
+            </span>
+          </div>
+
+          <div class="leaderboard-table-responsive">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th class="th-rank">র‍্যাঙ্ক</th>
+                  <th class="th-name">গ্রহণকারীর নাম</th>
+                  <th class="th-score">প্রাপ্ত নম্বর</th>
+                  <th class="th-accuracy">শতকরা</th>
+                  <th class="th-time">সম্পন্নের সময় ও তারিখ</th>
+                </tr>
+              </thead>
+              <tbody id="topParticipantsTableBody">
+                <!-- Dynamically populated by js/participants.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Bottom CTA Banner -->
+        <div class="page-cta-banner glass-panel">
+          <h3 class="banner-title">আপনিও শীর্ষ তালিকায় স্থান করে নিন!</h3>
+          <p class="banner-subtitle">
+            ১০টি মৌলিক প্রযুক্তি প্রশ্নের উত্তর দিয়ে আপনার মেধা যাচাই করুন এবং নাম ও ফলাফল যুক্ত করুন এই তালিকায়।
+          </p>
+          <button class="btn-glowing-launch" onclick="window.apnarProjuktiApp.quizManager.startRocketLaunchSequence();">
+            <span>আপনার প্রযুক্তি জ্ঞান পরীক্ষা করুন</span>
+            <span class="btn-rocket-icon">🚀</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         QUIZ & RESULTS MISSION VIEW
+         ==================================================================== -->
+    <section id="page-quiz" class="page-view" aria-label="কুইজ পেজ">
+      <div class="content-wrapper">
+
+        <!-- QUIZ CONTAINER -->
+        <div id="quizContainer" class="quiz-section-container">
+          <!-- Quiz Top Progress Bar -->
+          <div class="quiz-progress-block">
+            <div class="progress-header-row">
+              <span id="quizProgressText" class="progress-counter-text">
+                প্রশ্ন <span class="num-highlight">১</span> / ১০
+              </span>
+              <span class="progress-mission-tag">স্পেস মিশন প্রগ্রেস</span>
+            </div>
+            <div class="progress-bar-track" role="progressbar" aria-label="কুইজের অগ্রগতি">
+              <div id="quizProgressBarFill" class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <!-- Friendly Validation Warning Toast -->
+          <div id="quizWarningToast" class="quiz-warning-toast" role="alert">
+            অনুগ্রহ করে একটি উত্তর নির্বাচন করুন।
+          </div>
+
+          <!-- Dynamic Question Card -->
+          <div id="quizQuestionCard" class="quiz-question-card glass-panel">
+            <!-- Dynamically populated by js/quiz.js -->
+          </div>
+
+          <!-- Navigation Controls -->
+          <div class="quiz-nav-row">
+            <button id="btnQuizPrev" class="btn-quiz-nav btn-quiz-prev disabled" disabled>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+              <span>পেছনে</span>
+            </button>
+
+            <button id="btnQuizNext" class="btn-quiz-nav btn-quiz-next">
+              <span>পরবর্তী প্রশ্ন</span>
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Participant Name Prompt Modal (After Question 10) -->
+          <div id="quizNameModal" class="quiz-name-modal">
+            <div class="name-modal-card glass-panel">
+              <div class="name-modal-icon">🚀</div>
+              <span class="name-modal-badge">মিশন সম্পন্ন!</span>
+              <h3 class="name-modal-title">আপনার নাম লিখুন</h3>
+              <p class="name-modal-subtitle">
+                আপনার ফলাফল বিশ্লেষণ, মেধা তালিকায় যুক্ত হওয়া ও ডিজিটাল সনদের জন্য অনুগ্রহ করে আপনার নাম প্রদান করুন:
+              </p>
+              <div class="name-input-group">
+                <span class="input-icon-user">👤</span>
+                <input type="text" id="quizUserNameInput" class="quiz-name-input" placeholder="যেমন: শামিম আহসান" maxlength="40" autocomplete="name" />
+              </div>
+              <div id="nameInputWarning" class="name-input-warning">
+                অনুগ্রহ করে আপনার নাম লিখুন।
+              </div>
+              <button id="btnSubmitQuizName" class="btn-glowing-launch btn-submit-name">
+                <span>ফলাফল ও সনদ দেখুন</span>
+                <span class="btn-rocket-icon">🚀</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. ANALYZING / PROCESSING VIEW -->
+        <div id="quizAnalyzingView" class="quiz-analyzing-view glass-panel">
+          <div class="radar-telemetry-box">
+            <div class="radar-sweep-ring"></div>
+            <div class="radar-inner-scanner">🛰️</div>
+          </div>
+          <h3 class="analyzing-title">আপনার প্রযুক্তি জ্ঞান বিশ্লেষণ করা হচ্ছে...</h3>
+          <p class="analyzing-subtext">মহাকাশ ডেটা সেন্টারে আপনার উত্তরগুলো যাচাই ও মূল্যায়ন চলছে</p>
+        </div>
+
+        <!-- 2. FINAL RESULT SHOWCASE VIEW -->
+        <div id="quizResultView" class="quiz-result-view">
+          
+          <!-- Hero Result Card -->
+          <div class="result-hero-card glass-panel">
+            <div id="resultScoreBadge" class="result-badge grade-excellent">
+              ৮০/১০০ — চমৎকার!
+            </div>
+
+            <h2 id="resultTitleGreeting" class="result-title-greeting">অভিনন্দন!</h2>
+
+            <div class="result-score-block">
+              <span class="score-label-small">আপনার স্কোর</span>
+              <div id="resultScoreDisplay" class="result-score-display">
+                <span class="score-current">৮০</span>
+                <span class="score-divider">/</span>
+                <span class="score-total">১০০</span>
+              </div>
+              <span id="resultPercentDisplay" class="result-percent-tag">৮০%</span>
+            </div>
+
+            <p id="resultMessageText" class="result-message-text">
+              "চমৎকার! আপনার প্রযুক্তি জ্ঞান বেশ ভালো।"
+            </p>
+
+            <!-- Detailed Stat Counter Boxes -->
+            <div class="result-stats-row">
+              <div class="result-stat-box">
+                <span id="statCorrectCount" class="stat-box-val val-green">৮ টি</span>
+                <span class="stat-box-lbl">সঠিক উত্তর</span>
+              </div>
+              <div class="result-stat-box">
+                <span id="statWrongCount" class="stat-box-val val-red">২ টি</span>
+                <span class="stat-box-lbl">ভুল উত্তর</span>
+              </div>
+              <div class="result-stat-box">
+                <span id="statAccuracyPercent" class="stat-box-val val-cyan">৮০%</span>
+                <span class="stat-box-lbl">নির্ভুলতার হার</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons Panel -->
+          <div class="result-actions-panel">
+            <button id="btnDownloadScoreCard" class="btn-download-score">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>স্কোর কার্ড ডাউনলোড করুন</span>
+            </button>
+
+            <button id="btnRetakeQuiz" class="btn-retake-quiz">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>আবার পরীক্ষা দিন</span>
+            </button>
+
+            <button id="btnResultHome" class="btn-result-home">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+              <span>হোমে ফিরে যান</span>
+            </button>
+          </div>
+
+          <!-- Comprehensive Question Review Section -->
+          <div class="review-header-block">
+            <h3 class="review-section-title">প্রশ্নের বিস্তারিত পর্যালোচনা ও ব্যাখ্যা</h3>
+            <p class="review-section-subtitle">প্রতিটি প্রশ্নের সঠিক উত্তর ও প্রযুক্তিগত ব্যাখ্যা জেনে নিন</p>
+          </div>
+          <div id="quizReviewContainer" class="review-items-list">
+            <!-- Dynamically populated by js/quiz.js -->
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-brand-title">🚀 আপনার প্রযুক্তি জ্ঞান</div>
+      <p class="footer-desc">
+        বাংলা ভাষায় সহজ ও আনন্দদায়ক উপায়ে মৌলিক প্রযুক্তিগত জ্ঞান যাচাই ও তথ্যপ্রযুক্তি সচেতনতা বৃদ্ধির একটি আধুনিক মুক্ত উদ্যোগ।
+      </p>
+
+      <div class="footer-credit-badge">
+        <span class="credit-icon">⚡</span>
+        <span class="credit-label">ডিজাইন ও ডেভেলপমেন্ট:</span>
+        <strong class="credit-name">Shamim Ahsan</strong>
+      </div>
+
+      <div class="footer-copyright">
+        © ২০২৬ আপনার প্রযুক্তি জ্ঞান | ডিজাইন ও ডেভেলপমেন্ট: <span class="highlight-author">Shamim Ahsan</span> | সর্বস্বত্ব সংরক্ষিত।
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript Bundle -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
